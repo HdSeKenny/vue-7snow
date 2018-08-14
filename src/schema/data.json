@@ -1,0 +1,75 @@
+{
+  "product_types": [
+    {
+      "name": "necklace",
+      "value": "项链"
+    },
+    {
+      "name": "weapon",
+      "value": "武器"
+    },
+    { 
+      "name": "hat",
+      "value": "帽子"
+    },
+    { 
+      "name": "clothes",
+      "value": "衣服"
+    },
+    { 
+      "name": "bracelet",
+      "value": "手镯"
+    },
+    { 
+      "name": "ring",
+      "value": "戒指"
+    },
+    { 
+      "name": "shoes",
+      "value": "鞋子"
+    },
+    { 
+      "name": "Belt",
+      "value": "腰带"
+    },
+    { 
+      "name": "hands",
+      "value": "护手"
+    },
+    { 
+      "name": "cuff",
+      "value": "护腕"
+    },
+    {      
+      "name": "other",
+      "value": "其他"
+    }
+  ],
+  
+  "product_quality": [
+    {
+      "name": "none",
+      "value": "无"
+    },
+    {
+      "name": "green",
+      "value": "绿"
+    },
+    {
+      "name": "blue",
+      "value": "蓝"
+    },
+    {
+      "name": "red",
+      "value": "红"
+    },
+    {
+      "name": "purple",
+      "value": "紫"
+    },
+    {
+      "name": "orange",
+      "value": "橙"
+    }
+  ]
+}
