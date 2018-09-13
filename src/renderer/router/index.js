@@ -1,18 +1,19 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import Login from '../components/Login';
-import Product from '../components/Main/Right/Product';
-import Add from '../components/Main/Right/Add';
+import Vue from 'vue'
+import Router from 'vue-router'
+import Product from '../components/Main/Right/Product'
+import Add from '../components/Main/Right/Add'
+import Team from '../components/Main/Right/Team'
+import About from '../components/Main/Right/About'
+import Notebook from '../components/Main/Right/Notebook'
 
-
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'landing-page',
-      component: Login,
+      name: 'main-page',
+      redirect: '/main',
     },
     {
       path: '/main',
@@ -30,16 +31,23 @@ export default new Router({
           path: 'add-product',
           component: Add,
         },
+        {
+          path: 'team',
+          component: Team,
+        },
+        {
+          path: 'about',
+          component: About,
+        },
+        {
+          path: 'notebook',
+          component: Notebook,
+        },
       ],
     },
     {
-      path: '/product',
-      name: 'product-page',
-      component: require('@/components/Main/Right/Product').default,
-    },
-    {
       path: '*',
-      redirect: '/',
+      redirect: '/main',
     },
   ],
-});
+})

@@ -7,7 +7,7 @@
 <script>
   export default {
     name: 'sevensnow',
-  };
+  }
 </script>
 
 <style>

@@ -1,111 +1,163 @@
 <template>
   <div class="product-page">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="货物列表" name="first" class="product-list" v-loading="loading">
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="date" label="Date" sortable width="180" :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
-            :filter-method="filterHandler">
-          </el-table-column>
-          <el-table-column prop="name" label="Name" width="180">
-          </el-table-column>
-          <el-table-column prop="address" label="Address" :formatter="formatter">
-          </el-table-column>
-          <el-table-column prop="tag" label="Tag" width="100" :filters="[{ text: 'Home', value: 'Home' }, { text: 'Office', value: 'Office' }]"
-            :filter-method="filterTag" filter-placement="bottom-end">
-            <template slot-scope="scope">
-              <el-tag :type="scope.row.tag === 'Home' ? 'primary' : 'success'" disable-transitions>{{scope.row.tag}}</el-tag>
-            </template>
-          </el-table-column>
-
-          <el-table-column
-      label="Operations">
-      <template slot-scope="scope">
-        <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
-      </template>
-    </el-table-column>
-        </el-table>
+    <el-tabs v-model="activeName" @tab-click="handleTabClick">
+      <el-tab-pane label="寄售中" name="first">
+        <List :handleConfirmCheckout="handleConfirmCheckout" :activeName="activeName"/>
       </el-tab-pane>
-      <el-tab-pane label="未结算" name="second">Config</el-tab-pane>
-      <el-tab-pane label="结算记录" name="third">Role</el-tab-pane>
+      <el-tab-pane label="结算记录" name="second">
+        <History :isMax="isMax" :productQualities="productQualities" :activeName="activeName" />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+  import utils from '../utils'
+  import List from './Product/List'
+  import History from './Product/History'
 
   export default {
     name: 'product-page',
-    components: {},
+    components: { List, History },
     data() {
       return {
         activeName: 'first',
-        tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          tag: 'Home',
-        }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          tag: 'Office',
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          tag: 'Home',
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles',
-          tag: 'Office',
-        }],
         loading: true,
-      };
+        productQualities: [],
+        isMax: false,
+      }
     },
+
+    watch: {
+      $route: 'fetchData',
+    },
+
     methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
+      fetchData() {
+        utils.storageGetPromise('products').then((data) => {
+          this.productQualities = (data && data.product_quality) ?
+            data.product_quality.map((q) => {
+              q.text = q.value
+              return q
+            }) : []
+        })
+          .catch((err) => { throw err })
       },
-      formatter(row, column) {
-        console.log(column);
-        return row.address;
-      },
-      filterTag(value, row) {
-        return row.tag === value;
-      },
-      filterHandler(value, row, column) {
-        const property = column.property;
-        return row[property] === value;
+
+      handleTabClick() {},
+
+      handleConfirmCheckout(rowProduct) {
+        this.isMax = true
+        utils.storageGetPromise('checkout_histories').then((histories) => {
+          if (!histories.length) {
+            histories = [rowProduct]
+          }
+          histories.push(rowProduct)
+          utils.storageSetPromise('checkout_histories', histories).then(() => {
+            this.activeName = 'second'
+            this.$notify({
+              title: '结算成功',
+              type: 'success',
+              duration: 2000,
+            })
+          })
+        })
       },
     },
 
     created() {
-      console.log('created ====>');
+      this.fetchData()
     },
 
     mounted() {
-      this.loading = false;
-      console.log('mounted =====>');
+      this.loading = false
     },
 
     updated() {
-      console.log('updated =====>');
-    },
-  };
+    }
+  }
 </script>
 
-<style scoped>
-  .product-list {
-    /* border: 1px solid #ebebeb;
-    border-radius: 3px;
-    transition: .2s;
-    padding: 20px; */
+<style>
+  .hr-popover {
+    border: 1px solid #ebeef5
+  }
+
+  .checkout-info .el-tag--mini {
+    margin-right: 10px;
+  }
+
+  .checkout-info .info {
+    margin: 5px 0;
+  }
+
+  .checkout-info .info:last-child {
+    margin-top: 10px;
+  }
+  
+  .checkout-info .info .result {
+    margin-top: 15px;
+    margin-left: 10px;
+  }
+
+  .checkout-info .info .result p {
+    margin: 5px 0;
+  }
+
+  .checkout-info .value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #409EFF;
+  }
+
+  .money {
+    color: #F56C6C;
+  }
+
+  .checkout-histories {
+    min-height: 385px;
+  }
+
+  .checkout-histories .history {
+    width: 31.7%;
+    font-size: 14px;
+    margin: 3px 2% 3px 0;
+    display: inline-block;
+  }
+  .checkout-histories .history.third {
+    margin-right: 0;
+  }
+
+  .checkout-histories .history:hover {
+    cursor: pointer;
+  }
+
+  .checkout-histories .history .quality {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .checkout-histories .history .header {
+    width: 100%;
+  }
+
+  .checkout-histories .history .body {
+    font-size: 11px;
+  }
+
+  .pager {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .total {
+    margin: 8px 0 8px 0;
+    text-align: right;
+    font-size: 19px;
+    font-weight: 600;
+  }
+
+  .search-product, .search-history {
+    margin-bottom: 10px;
   }
 </style>

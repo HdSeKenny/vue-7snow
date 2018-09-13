@@ -1,0 +1,74 @@
+{
+  "all_persons": [
+    {
+      "name": "啊呜姐姐",
+      "nickname": "虾饺皇",
+      "avatar": "static/persons/awjj.png"
+    },
+    {
+      "name": "班长",
+      "nickname": "麦丽素",
+      "avatar": "static/persons/bz.png"
+    },
+    {
+      "name": "大魔王",
+      "nickname": "海天盛筵",
+      "avatar": "static/persons/dmw.png"
+    },
+    {
+      "name": "汤春焱",
+      "nickname": "酸辣汤",
+      "avatar": "static/persons/tcy.png"
+    },
+    {
+      "name": "吴双",
+      "nickname": "玉兰饼",
+      "avatar": "static/persons/ws.png"
+    },
+    {
+      "name": "丸子",
+      "nickname": "小丸子",
+      "avatar": "static/persons/wz.png"
+    },
+    {
+      "name": "丸子姐姐",
+      "nickname": "丸子姐姐",
+      "avatar": "static/persons/wzjj.png"
+    },
+    {
+      "name": "筱龙虾",
+      "nickname": "筱龙虾",
+      "avatar": "static/persons/xlx.png"
+    },
+    {
+      "name": "小师妹",
+      "nickname": "绵绵冰",
+      "avatar": "static/persons/xsm.png"
+    },
+    {
+      "name": "于谦",
+      "nickname": "大闸蟹",
+      "avatar": "static/persons/yq.png"
+    },
+    {
+      "name": "鱼丸",
+      "nickname": "玄米茶",
+      "avatar": "static/persons/yw.png"
+    },
+    {
+      "name": "郁臻",
+      "nickname": "冰阔乐",
+      "avatar": "static/persons/yz.png"
+    },
+    {
+      "name": "君老板",
+      "nickname": "糯米糕",
+      "avatar": "static/persons/jlb.png"
+    },
+    {
+      "name": "德biu",
+      "nickname": "张德彪",
+      "avatar": "static/persons/jlb.png"
+    }
+  ]
+}
