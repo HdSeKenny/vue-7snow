@@ -44,9 +44,28 @@
     -webkit-app-region: drag;
   }
 
-  body {
-    font-family: 'Source Sans Pro', sans-serif;
+  #title-bar {
     -webkit-app-region: drag;
+    height: 24px; 
+    padding: none;
+    margin: 0px; 
+  }
+
+  #title {
+    position: fixed;
+    top: 0px;
+    left: 6px; 
+  }
+
+  #title-bar-btns {
+    -webkit-app-region: no-drag;
+    position: fixed;
+    top: 0px;
+    right: 6px;
+  }
+
+  body {
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
     background:
       radial-gradient(
         ellipse at top left,
@@ -56,7 +75,19 @@
     height: 100vh;
     width: 100vw;
     margin: 0;
+    -webkit-app-region: drag;
   }
+  
+  .el-tabs__nav,
+  .el-table,
+  .el-card,
+  input,
+  button,
+  .pager {
+    -webkit-app-region: no-drag;
+  }
+
+
 
   #logo {
     height: auto;

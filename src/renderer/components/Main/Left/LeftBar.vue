@@ -1,18 +1,25 @@
 <template>
   <div class="left-bar">
+          <div id="title-bar">
+          <div id="title-bar-btns">
+               <button id="min-btn">-</button>
+               <button id="max-btn">+</button>
+               <button id="close-btn">x</button>
+          </div>
+     </div>
     <div class="logo">
       <img src="~@/assets/logo.png" width="150" height="70">
     </div>
-  <div class="select-options">
-    <router-link
-      :to="option.link"
-      class="option"
-      v-for="option in listSource"
-      :key="option.value">
-      <i :class="option.icon"></i>
-      {{option.value}}
-    </router-link>
-  </div>
+    <div class="select-options">
+      <router-link
+        :to="option.link"
+        class="option"
+        v-for="option in listSource"
+        :key="option.value">
+        <i :class="option.icon"></i>
+        {{option.value}}
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -58,6 +65,7 @@
     display: block;
     text-decoration: none;
     color: #333;
+    -webkit-app-region: no-drag;
   }
 
   .option.router-link-exact-active.router-link-active {
