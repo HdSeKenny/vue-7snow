@@ -1,12 +1,5 @@
 <template>
   <div class="left-bar">
-          <div id="title-bar">
-          <div id="title-bar-btns">
-               <button id="min-btn">-</button>
-               <button id="max-btn">+</button>
-               <button id="close-btn">x</button>
-          </div>
-     </div>
     <div class="logo">
       <img src="~@/assets/logo.png" width="150" height="70">
     </div>
@@ -19,6 +12,9 @@
         <i :class="option.icon"></i>
         {{option.value}}
       </router-link>
+    </div>
+    <div class="bar-footer">
+      <p> © 2018 Kenny <span class="version" @click="open('https://github.com/HdSeKenny/vue-7snow')">V 1.0</span></p>
     </div>
   </div>
 </template>
@@ -40,7 +36,11 @@
         listSource,
       }
     },
-    methods: {},
+    methods: {
+      open(link) {
+        this.$electron.shell.openExternal(link)
+      },
+    },
   }
 </script>
 
@@ -74,5 +74,22 @@
   
   .option i {
     margin-right: 12px;
+  }
+
+  .bar-footer {
+    -webkit-app-region: no-drag;
+    position: absolute;
+    bottom: 20px;
+    left: 45px;
+    font-size: 12px;
+    color: #bbb;
+  }
+
+  .bar-footer .version {
+    color: #409EFF;
+  }
+
+  .bar-footer .version:hover {
+    cursor: pointer;
   }
 </style>

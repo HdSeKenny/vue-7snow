@@ -39,29 +39,26 @@
     padding: 0;
   }
   
+  #app {
+    height: 100%;
+  }
+
   .titlebar {
-    -webkit-user-select: none;
     -webkit-app-region: drag;
+    user-select: none;
+    display: block;
+    position: absolute;
+    height: 32px;
+    padding: 0;
+    top: 0;
+    width: 100%;
   }
 
-  #title-bar {
-    -webkit-app-region: drag;
-    height: 24px; 
-    padding: none;
-    margin: 0px; 
-  }
-
-  #title {
-    position: fixed;
-    top: 0px;
-    left: 6px; 
-  }
-
-  #title-bar-btns {
+  .titlebar .titlebar-controls {
     -webkit-app-region: no-drag;
-    position: fixed;
-    top: 0px;
-    right: 6px;
+    position: absolute;
+    background: #409EFF;
+    right: 0;
   }
 
   body {
@@ -75,20 +72,8 @@
     height: 100vh;
     width: 100vw;
     margin: 0;
-    -webkit-app-region: drag;
   }
   
-  .el-tabs__nav,
-  .el-table,
-  .el-card,
-  input,
-  button,
-  .pager {
-    -webkit-app-region: no-drag;
-  }
-
-
-
   #logo {
     height: auto;
     margin-bottom: 20px;
@@ -159,11 +144,13 @@
 
   .main-page {
     width: 100%;
+    height: 100%;
   }
 
   .left {
+    -webkit-app-region: drag;
     width: 22%;
-    min-height: 580px;
+    height: 100%;
     float: left;
     background:
       radial-gradient(

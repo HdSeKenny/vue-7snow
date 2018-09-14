@@ -14,16 +14,21 @@ const winURL = process.env.NODE_ENV === 'development'
   : `file://${__dirname}/index.html`
 
 function createWindow() {
-  /**
-   * Initial window options
-   */
-  mainWindow = new BrowserWindow({
+  const browserWindowOptions = {
     height: 580,
     useContentSize: true,
     width: 945,
-    frame: false,
-    // titleBarStyle: 'hidden',
-  })
+    frame: false
+  }
+
+  if (process.platform === 'darwin') {
+    browserWindowOptions.titleBarStyle = 'hidden'
+  }
+
+  /**
+   * Initial window options
+   */
+  mainWindow = new BrowserWindow(browserWindowOptions)
 
   mainWindow.loadURL(winURL)
 
