@@ -46,13 +46,16 @@
 
       handleTabClick() {},
 
-      handleConfirmCheckout(rowProduct) {
+      handleConfirmCheckout(rowProduct, success) {
         this.isMax = true
         utils.storageGetPromise('checkout_histories').then((histories) => {
           if (!histories.length) {
             histories = [rowProduct]
           }
-          histories.push(rowProduct)
+          else {
+            histories.push(rowProduct)
+          }
+
           utils.storageSetPromise('checkout_histories', histories).then(() => {
             this.activeName = 'second'
             this.$notify({
@@ -60,6 +63,7 @@
               type: 'success',
               duration: 2000,
             })
+            success()
           })
         })
       },
